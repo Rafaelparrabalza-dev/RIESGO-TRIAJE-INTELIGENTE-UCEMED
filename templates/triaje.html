@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Assessment Form</title>
+</head>
+<body>
+    <h1>Patient Assessment Form</h1>
+    <form id="patient-assessment-form">
+        <label for="patientName">Patient Name:</label>
+        <input type="text" id="patientName" name="patientName" required><br><br>
+
+        <label for="patientAge">Patient Age:</label>
+        <input type="number" id="patientAge" name="patientAge" required><br><br>
+
+        <label for="patientSymptoms">Symptoms:</label><br>
+        <textarea id="patientSymptoms" name="patientSymptoms" rows="4" required></textarea><br><br>
+
+        <button type="button" onclick="generateQR()">Generate QR Code</button>
+    </form>
+
+    <h2>Generated QR Code</h2>
+    <div id="qr-code"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script>
+        function generateQR() {
+            var name = $('#patientName').val();
+            var age = $('#patientAge').val();
+            var symptoms = $('#patientSymptoms').val();
+            var qrData = `Patient Name: ${name}\nAge: ${age}\nSymptoms: ${symptoms}`;
+            $('#qr-code').empty().qrcode({
+                width: 128,
+                height: 128,
+                text: qrData
+            });
+        }
+    </script>
+</body>
+</html>
